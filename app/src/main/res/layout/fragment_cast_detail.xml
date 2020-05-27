@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.CastDetailFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.podcast.viewmodel.CastDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            app:imageUrl="@{viewModel.cover}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{viewModel.artist}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_photo"
+            tools:text="Subtitle" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:lines="3"
+            android:text="@{viewModel.album}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
+            app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="@id/tv_subtitle"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_banner"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:gravity="center_vertical"
+            android:text="@string/all_episodes"
+            app:layout_constraintEnd_toEndOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="@id/iv_photo"
+            app:layout_constraintTop_toBottomOf="@id/iv_photo" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/track_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_banner"
+            app:trackList="@{viewModel.tracks}"
+            tools:listitem="@layout/item_track" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
